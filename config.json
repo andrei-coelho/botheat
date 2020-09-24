@@ -1,0 +1,7 @@
+{
+    "production":false,
+    "start":"home",
+    "error":"erro404",
+    "url_production":"http://botheat.com.br",
+    "url_development":"http://localhost/botheat/"
+}
