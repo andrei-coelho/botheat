@@ -12,7 +12,7 @@ function perfis_salvarPerfil(){
     $status = sqli::exec($insert);
     
     api_response(($status == true ? "ok" : $status));
-    
+
 }
 
 function perfis_gerarPerfil(){
@@ -20,9 +20,9 @@ function perfis_gerarPerfil(){
     $response = [];
     $nomeSel = sqli::query("SELECT nome FROM nomes ORDER BY rand() LIMIT 1");
     $sobrenomeSel = sqli::query("SELECT sobrenome FROM sobrenomes ORDER BY rand() LIMIT 1");
-    $imageSel = sqli::query("SELECT id, slug FROM imagens_perfil ORDER BY id ASC LIMIT 1");
+    $imageSel = sqli::query("SELECT id, slug FROM imagens_perfil WHERE used = 0 ORDER BY id ASC LIMIT 1");
     $image = $imageSel ->fetchAssoc();
-    // sqli::exec("UPDATE imagens_perfil SET used = 1 WHERE id = ".$image['id']);
+    sqli::exec("UPDATE imagens_perfil SET used = 1 WHERE id = ".$image['id']);
 
     $response['nome']      = trim(mb_ucfirst(mb_strtolower($nomeSel->fetchAssoc()['nome'], 'utf-8')));
     $response['sobrenome'] = trim(mb_ucfirst(mb_strtolower($sobrenomeSel->fetchAssoc()['sobrenome'], 'utf-8')));
